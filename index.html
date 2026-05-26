@@ -1,55 +1,53 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>404 Price Error</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Stránka nenalezena</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0f0f0f;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
 
-<style>
-    body{
-        margin:0;
-        height:100vh;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        background:#0f172a;
-        font-family:Arial, sans-serif;
-    }
+        .container h1 {
+            font-size: 120px;
+            margin: 0;
+        }
 
-    .price-error{
-        background:#111827;
-        border:3px solid #ef4444;
-        padding:40px 60px;
-        border-radius:20px;
-        text-align:center;
-        box-shadow:0 0 25px rgba(239,68,68,0.5);
-        animation:shake 0.3s infinite alternate;
-    }
+        .container p {
+            font-size: 22px;
+            color: #bdbdbd;
+        }
 
-    .price-error h1{
-        margin:0;
-        font-size:90px;
-        color:#ef4444;
-    }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: #ffffff;
+            color: #000;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
 
-    .price-error p{
-        margin-top:10px;
-        font-size:22px;
-        color:white;
-    }
-
-    @keyframes shake{
-        from{ transform:translateX(-2px); }
-        to{ transform:translateX(2px); }
-    }
-</style>
+        .btn:hover {
+            background: #dcdcdc;
+        }
+    </style>
 </head>
 <body>
-
-<div class="price-error">
-    <h1>404</h1>
-    <p>Cena nenalezena</p>
-</div>
-
+    <div class="container">
+        <h1>404</h1>
+        <p>Tahle stránka neexistuje.</p>
+        <a href="/" class="btn">Zpět na hlavní stránku</a>
+    </div>
 </body>
 </html>

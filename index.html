@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 Price Error</title>
+
+<style>
+    body{
+        margin:0;
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:#0f172a;
+        font-family:Arial, sans-serif;
+    }
+
+    .price-error{
+        background:#111827;
+        border:3px solid #ef4444;
+        padding:40px 60px;
+        border-radius:20px;
+        text-align:center;
+        box-shadow:0 0 25px rgba(239,68,68,0.5);
+        animation:shake 0.3s infinite alternate;
+    }
+
+    .price-error h1{
+        margin:0;
+        font-size:90px;
+        color:#ef4444;
+    }
+
+    .price-error p{
+        margin-top:10px;
+        font-size:22px;
+        color:white;
+    }
+
+    @keyframes shake{
+        from{ transform:translateX(-2px); }
+        to{ transform:translateX(2px); }
+    }
+</style>
+</head>
+<body>
+
+<div class="price-error">
+    <h1>404</h1>
+    <p>Cena nenalezena</p>
+</div>
+
+</body>
+</html>

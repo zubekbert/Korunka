@@ -1,670 +1,640 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Školní Parlament — ZŠ a SŠ Vzorová</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #1B3566;
-      --primary-dark: #0E1F40;
-      --accent: #E8920A;
-      --accent-light: #FFF3E0;
-      --bg: #FAFAF8;
-      --bg2: #F2F1EB;
-      --text: #1A1A1A;
-      --text-muted: #6B6B6B;
-      --border: #E5E3DC;
-      --white: #FFFFFF;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Nunito', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      font-size: 16px;
-      line-height: 1.7;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Školní Parlament — ZŠ Korunovační</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1B3566;
+      --primary-dark: #0E1F40;
+      --accent: #E8920A;
+      --accent-light: #FFF3E0;
+      --bg: #FAFAF8;
+      --bg2: #F2F1EB;
+      --text: #1A1A1A;
+      --text-muted: #6B6B6B;
+      --border: #E5E3DC;
+      --white: #FFFFFF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: auto; } /* Změněno na auto, scrollování řeší nové stránky */
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(27, 53, 102, 0.97);
-      backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 6%; height: 64px;
-      transition: box-shadow 0.3s;
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      color: white; font-size: 17px; font-weight: 700;
-      text-decoration: none; display: flex; align-items: center; gap: 10px;
-    }
-    .nav-logo-badge {
-      width: 34px; height: 34px; background: var(--accent);
-      border-radius: 8px; display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 900; color: white; flex-shrink: 0;
-    }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      color: rgba(255,255,255,0.75); text-decoration: none;
-      font-size: 14px; font-weight: 500; transition: color 0.2s; letter-spacing: 0.01em;
-    }
-    .nav-links a:hover { color: white; }
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px; cursor: pointer;
-      background: none; border: none; padding: 4px;
-    }
-    .hamburger span { display: block; width: 22px; height: 2px; background: white; transition: all 0.3s; }
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(27, 53, 102, 0.97);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%; height: 64px;
+      transition: box-shadow 0.3s;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      color: white; font-size: 17px; font-weight: 700;
+      text-decoration: none; display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo-badge {
+      width: 34px; height: 34px; background: var(--accent);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 900; color: white; flex-shrink: 0;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75); text-decoration: none;
+      font-size: 14px; font-weight: 500; transition: color 0.2s; letter-spacing: 0.01em;
+    }
+    .nav-links a:hover { color: white; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .hamburger span { display: block; width: 22px; height: 2px; background: white; transition: all 0.3s; }
 
-    /* ── MOBILE OVERLAY NAV ── */
-    .mobile-nav {
-      position: fixed; inset: 0; background: var(--primary-dark);
-      z-index: 200; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 2rem;
-      opacity: 0; pointer-events: none; transition: opacity 0.3s;
-    }
-    .mobile-nav.open { opacity: 1; pointer-events: all; }
-    .mobile-nav a {
-      font-family: 'Playfair Display', serif; font-size: 2rem;
-      color: white; text-decoration: none; font-weight: 700;
-    }
-    .mobile-nav-close {
-      position: absolute; top: 1.25rem; right: 6%;
-      background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer;
-    }
+    /* ── MOBILE OVERLAY NAV ── */
+    .mobile-nav {
+      position: fixed; inset: 0; background: var(--primary-dark);
+      z-index: 200; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 2rem;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .mobile-nav.open { opacity: 1; pointer-events: all; }
+    .mobile-nav a {
+      font-family: 'Playfair Display', serif; font-size: 2rem;
+      color: white; text-decoration: none; font-weight: 700;
+    }
+    .mobile-nav-close {
+      position: absolute; top: 1.25rem; right: 6%;
+      background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer;
+    }
 
-    /* ── SECTIONS ── */
-    section { padding: 100px 6%; }
+    /* ── SECTIONS ── */
+    section { padding: 100px 6%; }
 
-    /* ── HERO ── */
-    #home {
-      min-height: 100vh; background: var(--primary);
-      display: flex; align-items: center; position: relative;
-      overflow: hidden; padding: 64px 6% 0;
-    }
-    .hero-bg-glow {
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background:
-        radial-gradient(ellipse at 15% 25%, rgba(232,146,10,0.14) 0%, transparent 55%),
-        radial-gradient(ellipse at 85% 75%, rgba(255,255,255,0.04) 0%, transparent 50%);
-      pointer-events: none;
-    }
-    .hero-grid-lines {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 64px 64px; pointer-events: none;
-    }
-    .hero-content { position: relative; z-index: 1; max-width: 680px; }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(232,146,10,0.14); border: 1px solid rgba(232,146,10,0.4);
-      color: #F5C060; font-size: 11px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 6px 16px; border-radius: 100px; margin-bottom: 1.5rem;
-    }
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 6.5vw, 5.2rem);
-      color: white; line-height: 1.08; margin-bottom: 1.5rem; font-weight: 900;
-    }
-    .hero-title .accent-word { color: #F5C060; font-style: italic; }
-    .hero-subtitle {
-      font-size: 1.05rem; color: rgba(255,255,255,0.68);
-      margin-bottom: 2.5rem; max-width: 500px; line-height: 1.85;
-    }
-    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--accent); color: white;
-      padding: 13px 26px; border-radius: 8px; text-decoration: none;
-      font-weight: 600; font-size: 15px; display: inline-block;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .btn-primary:hover { background: #C97D00; transform: translateY(-1px); }
-    .btn-outline {
-      border: 1.5px solid rgba(255,255,255,0.3); color: white;
-      padding: 13px 26px; border-radius: 8px; text-decoration: none;
-      font-weight: 500; font-size: 15px; display: inline-block;
-      transition: all 0.2s;
-    }
-    .btn-outline:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.6); }
-    .hero-stats {
-      position: absolute; bottom: 3.5rem; right: 6%;
-      display: flex; gap: 2.5rem; z-index: 1;
-    }
-    .hero-stat { text-align: right; }
-    .hero-stat-num {
-      font-family: 'Playfair Display', serif; font-size: 2.8rem;
-      color: white; font-weight: 700; line-height: 1;
-    }
-    .hero-stat-label { font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; }
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh; background: var(--primary);
+      display: flex; align-items: center; position: relative;
+      overflow: hidden; padding: 64px 6% 0;
+    }
+    .hero-bg-glow {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse at 15% 25%, rgba(232,146,10,0.14) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 75%, rgba(255,255,255,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-grid-lines {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 64px 64px; pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 680px; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(232,146,10,0.14); border: 1px solid rgba(232,146,10,0.4);
+      color: #F5C060; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 100px; margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6.5vw, 5.2rem);
+      color: white; line-height: 1.08; margin-bottom: 1.5rem; font-weight: 900;
+    }
+    .hero-title .accent-word { color: #F5C060; font-style: italic; }
+    .hero-subtitle {
+      font-size: 1.05rem; color: rgba(255,255,255,0.68);
+      margin-bottom: 2.5rem; max-width: 500px; line-height: 1.85;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent); color: white;
+      padding: 13px 26px; border-radius: 8px; text-decoration: none;
+      font-weight: 600; font-size: 15px; display: inline-block;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #C97D00; transform: translateY(-1px); }
+    .btn-outline {
+      border: 1.5px solid rgba(255,255,255,0.3); color: white;
+      padding: 13px 26px; border-radius: 8px; text-decoration: none;
+      font-weight: 500; font-size: 15px; display: inline-block;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.6); }
+    .hero-stats {
+      position: absolute; bottom: 3.5rem; right: 6%;
+      display: flex; gap: 2.5rem; z-index: 1;
+    }
+    .hero-stat { text-align: right; }
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif; font-size: 2.8rem;
+      color: white; font-weight: 700; line-height: 1;
+    }
+    .hero-stat-label { font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; }
 
-    /* ── SHARED LABELS ── */
-    .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.6rem; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1.2; color: var(--primary); margin-bottom: 1rem; }
-    .section-desc { color: var(--text-muted); font-size: 1rem; max-width: 520px; line-height: 1.85; }
+    /* ── SHARED LABELS ── */
+    .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.6rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1.2; color: var(--primary); margin-bottom: 1rem; }
+    .section-desc { color: var(--text-muted); font-size: 1rem; max-width: 520px; line-height: 1.85; }
 
-    /* ── O NÁS ── */
-    #onas { background: var(--white); }
-    .onas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3rem; }
-    .onas-visual { position: relative; }
-    .onas-main-card { background: var(--primary); border-radius: 16px; padding: 3rem; }
-    .onas-quote { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-style: italic; line-height: 1.55; color: white; margin-bottom: 1.5rem; }
-    .onas-quote-source { font-size: 13px; color: rgba(255,255,255,0.45); display: flex; align-items: center; gap: 10px; }
-    .onas-quote-source::before { content: ''; display: block; width: 24px; height: 1px; background: rgba(255,255,255,0.25); }
-    .onas-float-stat {
-      position: absolute; bottom: -1.75rem; right: -1.5rem;
-      background: var(--accent); color: white; border-radius: 14px;
-      padding: 1rem 1.4rem; box-shadow: 0 8px 28px rgba(232,146,10,0.35);
-    }
-    .onas-float-stat strong { display: block; font-size: 2.2rem; font-family: 'Playfair Display', serif; line-height: 1; margin-bottom: 3px; }
-    .onas-float-stat span { font-size: 12px; opacity: 0.85; }
-    .onas-text { padding-right: 1rem; }
-    .onas-text h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--primary); margin: 1.5rem 0 0.5rem; }
-    .onas-text h3:first-child { margin-top: 0; }
-    .pillars { display: flex; flex-direction: column; gap: 14px; margin-top: 1.5rem; }
-    .pillar { display: flex; align-items: flex-start; gap: 12px; }
-    .pillar-icon { width: 34px; height: 34px; background: var(--accent-light); border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; }
-    .pillar-text strong { display: block; font-size: 14px; font-weight: 600; color: var(--text); }
-    .pillar-text span { font-size: 13px; color: var(--text-muted); }
+    /* ── O NÁS ── */
+    #onas { background: var(--white); }
+    .onas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3rem; }
+    .onas-visual { position: relative; }
+    .onas-main-card { background: var(--primary); border-radius: 16px; padding: 3rem; }
+    .onas-quote { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-style: italic; line-height: 1.55; color: white; margin-bottom: 1.5rem; }
+    .onas-quote-source { font-size: 13px; color: rgba(255,255,255,0.45); display: flex; align-items: center; gap: 10px; }
+    .onas-quote-source::before { content: ''; display: block; width: 24px; height: 1px; background: rgba(255,255,255,0.25); }
+    .onas-float-stat {
+      position: absolute; bottom: -1.75rem; right: -1.5rem;
+      background: var(--accent); color: white; border-radius: 14px;
+      padding: 1rem 1.4rem; box-shadow: 0 8px 28px rgba(232,146,10,0.35);
+    }
+    .onas-float-stat strong { display: block; font-size: 2.2rem; font-family: 'Playfair Display', serif; line-height: 1; margin-bottom: 3px; }
+    .onas-float-stat span { font-size: 12px; opacity: 0.85; }
+    .onas-text { padding-right: 1rem; }
+    .onas-text h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--primary); margin: 1.5rem 0 0.5rem; }
+    .onas-text h3:first-child { margin-top: 0; }
+    .pillars { display: flex; flex-direction: column; gap: 14px; margin-top: 1.5rem; }
+    .pillar { display: flex; align-items: flex-start; gap: 12px; }
+    .pillar-icon { width: 34px; height: 34px; background: var(--accent-light); border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+    .pillar-text strong { display: block; font-size: 14px; font-weight: 600; color: var(--text); }
+    .pillar-text span { font-size: 13px; color: var(--text-muted); }
 
-    /* ── AKTUALITY ── */
-    #aktuality { background: var(--bg2); }
-    .aktuality-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem; }
-    .news-grid { display: grid; grid-template-columns: 1.45fr 1fr 1fr; gap: 1.2rem; }
-    .news-card { background: white; border-radius: 13px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.25s, box-shadow 0.25s; cursor: pointer; }
-    .news-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(27,53,102,0.1); }
-    .news-card.featured { grid-row: span 2; }
-    .news-img { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-    .news-card.featured .news-img { height: 220px; }
-    .news-card:not(.featured) .news-img { height: 110px; }
-    .ni-blue { background: #1B3566; }
-    .ni-amber { background: #7B4A0A; }
-    .ni-teal { background: #0D5A63; }
-    .ni-plum { background: #4A1B6B; }
-    .ni-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 35%, rgba(255,255,255,0.07) 0%, transparent 65%); }
-    .ni-text { position: relative; z-index: 1; font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; color: rgba(255,255,255,0.12); text-align: center; padding: 1rem; letter-spacing: -0.01em; }
-    .news-body { padding: 1.2rem 1.3rem 1.3rem; }
-    .news-tag { display: inline-block; background: var(--accent-light); color: #7B4A00; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; padding: 3px 10px; border-radius: 100px; margin-bottom: 0.6rem; }
-    .news-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 0.5rem; }
-    .news-card.featured .news-title { font-size: 1.25rem; }
-    .news-excerpt { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 0.75rem; }
-    .news-meta { font-size: 12px; color: #AAAAAA; display: flex; align-items: center; gap: 7px; }
-    .news-meta::before { content: ''; width: 16px; height: 1px; background: #DDDBD5; }
+    /* ── AKTUALITY ── */
+    #aktuality { background: var(--bg2); }
+    .aktuality-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem; }
+    .news-grid { display: grid; grid-template-columns: 1.45fr 1fr 1fr; gap: 1.2rem; }
+    .news-card { background: white; border-radius: 13px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.25s, box-shadow 0.25s; cursor: pointer; }
+    .news-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(27,53,102,0.1); }
+    .news-card.featured { grid-row: span 2; }
+    .news-img { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .news-card.featured .news-img { height: 220px; }
+    .news-card:not(.featured) .news-img { height: 110px; }
+    .ni-blue { background: #1B3566; }
+    .ni-amber { background: #7B4A0A; }
+    .ni-teal { background: #0D5A63; }
+    .ni-plum { background: #4A1B6B; }
+    .ni-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 35%, rgba(255,255,255,0.07) 0%, transparent 65%); }
+    .ni-text { position: relative; z-index: 1; font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; color: rgba(255,255,255,0.12); text-align: center; padding: 1rem; letter-spacing: -0.01em; }
+    .news-body { padding: 1.2rem 1.3rem 1.3rem; }
+    .news-tag { display: inline-block; background: var(--accent-light); color: #7B4A00; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; padding: 3px 10px; border-radius: 100px; margin-bottom: 0.6rem; }
+    .news-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 0.5rem; }
+    .news-card.featured .news-title { font-size: 1.25rem; }
+    .news-excerpt { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 0.75rem; }
+    .news-meta { font-size: 12px; color: #AAAAAA; display: flex; align-items: center; gap: 7px; }
+    .news-meta::before { content: ''; width: 16px; height: 1px; background: #DDDBD5; }
 
-    /* ── ČLENOVÉ ── */
-    #clenove { background: white; }
-    .clenove-head { text-align: center; margin-bottom: 3rem; }
-    .clenove-head .section-desc { margin: 0 auto; }
-    .president-row { display: flex; justify-content: center; margin-bottom: 2rem; }
-    .member-card {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 14px; padding: 1.5rem; text-align: center;
-      transition: transform 0.22s, box-shadow 0.22s;
-    }
-    .member-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(27,53,102,0.09); }
-    .member-card.president { border-color: var(--accent); background: white; min-width: 210px; position: relative; }
-    .president-badge {
-      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--accent); color: white; font-size: 10px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.07em; padding: 4px 14px; border-radius: 100px;
-      white-space: nowrap;
-    }
-    .avatar {
-      width: 68px; height: 68px; border-radius: 50%;
-      margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: white;
-    }
-    .av1 { background: #1B3566; } .av2 { background: #E8920A; }
-    .av3 { background: #0D5A63; } .av4 { background: #4A1B6B; }
-    .av5 { background: #1A6B3D; } .av6 { background: #8B1A52; }
-    .av7 { background: #3B4D6B; } .av8 { background: #6B3A10; }
-    .member-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text); margin-bottom: 4px; }
-    .member-role { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
-    .member-class { font-size: 12px; color: var(--text-muted); }
-    .vice-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; max-width: 460px; margin: 0 auto 1.5rem; }
-    .members-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; max-width: 960px; margin: 0 auto; }
+    /* ── ČLENOVÉ ── */
+    #clenove { background: white; }
+    .clenove-head { text-align: center; margin-bottom: 3rem; }
+    .clenove-head .section-desc { margin: 0 auto; }
+    .president-row { display: flex; justify-content: center; margin-bottom: 2rem; }
+    .member-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.5rem; text-align: center;
+      transition: transform 0.22s, box-shadow 0.22s;
+    }
+    .member-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(27,53,102,0.09); }
+    .member-card.president { border-color: var(--accent); background: white; min-width: 210px; position: relative; }
+    .president-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: white; font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.07em; padding: 4px 14px; border-radius: 100px;
+      white-space: nowrap;
+    }
+    .avatar {
+      width: 68px; height: 68px; border-radius: 50%;
+      margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: white;
+    }
+    .av1 { background: #1B3566; } .av2 { background: #E8920A; }
+    .av3 { background: #0D5A63; } .av4 { background: #4A1B6B; }
+    .av5 { background: #1A6B3D; } .av6 { background: #8B1A52; }
+    .av7 { background: #3B4D6B; } .av8 { background: #6B3A10; }
+    .member-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text); margin-bottom: 4px; }
+    .member-role { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+    .member-class { font-size: 12px; color: var(--text-muted); }
+    .vice-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; max-width: 460px; margin: 0 auto 1.5rem; }
+    .members-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; max-width: 960px; margin: 0 auto; }
 
-    /* ── KONTAKT ── */
-    #kontakt { background: var(--primary); }
-    #kontakt .section-label { color: #F5C060; }
-    #kontakt .section-title { color: white; }
-    #kontakt .section-desc { color: rgba(255,255,255,0.58); }
-    .kontakt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 3rem; }
-    .kontakt-info { display: flex; flex-direction: column; gap: 1.75rem; }
-    .kontakt-item { display: flex; align-items: flex-start; gap: 1rem; }
-    .kontakt-icon { width: 40px; height: 40px; background: rgba(255,255,255,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-    .kontakt-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.38); margin-bottom: 4px; }
-    .kontakt-value { color: white; font-size: 15px; line-height: 1.5; }
-    .kontakt-form { display: flex; flex-direction: column; gap: 0.9rem; }
-    .kontakt-form input, .kontakt-form textarea {
-      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 8px; padding: 11px 15px; color: white;
-      font-family: 'Nunito', sans-serif; font-size: 14px; outline: none;
-      transition: border-color 0.2s; width: 100%;
-    }
-    .kontakt-form input::placeholder, .kontakt-form textarea::placeholder { color: rgba(255,255,255,0.28); }
-    .kontakt-form input:focus, .kontakt-form textarea:focus { border-color: rgba(245,192,96,0.5); }
-    .kontakt-form textarea { min-height: 100px; resize: vertical; }
-    .kontakt-form button {
-      background: var(--accent); color: white; border: none; padding: 13px;
-      border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 15px;
-      font-weight: 600; cursor: pointer; transition: background 0.2s;
-    }
-    .kontakt-form button:hover { background: #C97D00; }
+    /* ── KONTAKT ── */
+    #kontakt { background: var(--primary); }
+    #kontakt .section-label { color: #F5C060; }
+    #kontakt .section-title { color: white; }
+    #kontakt .section-desc { color: rgba(255,255,255,0.58); }
+    .kontakt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 3rem; }
+    .kontakt-info { display: flex; flex-direction: column; gap: 1.75rem; }
+    .kontakt-item { display: flex; align-items: flex-start; gap: 1rem; }
+    .kontakt-icon { width: 40px; height: 40px; background: rgba(255,255,255,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .kontakt-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.38); margin-bottom: 4px; }
+    .kontakt-value { color: white; font-size: 15px; line-height: 1.5; }
+    .kontakt-form { display: flex; flex-direction: column; gap: 0.9rem; }
+    .kontakt-form input, .kontakt-form textarea {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 11px 15px; color: white;
+      font-family: 'Nunito', sans-serif; font-size: 14px; outline: none;
+      transition: border-color 0.2s; width: 100%;
+    }
+    .kontakt-form input::placeholder, .kontakt-form textarea::placeholder { color: rgba(255,255,255,0.28); }
+    .kontakt-form input:focus, .kontakt-form textarea:focus { border-color: rgba(245,192,96,0.5); }
+    .kontakt-form textarea { min-height: 100px; resize: vertical; }
+    .kontakt-form button {
+      background: var(--accent); color: white; border: none; padding: 13px;
+      border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 15px;
+      font-weight: 600; cursor: pointer; transition: background 0.2s;
+    }
+    .kontakt-form button:hover { background: #C97D00; }
 
-    /* ── FOOTER ── */
-    footer {
-      background: #091530; padding: 1.75rem 6%;
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 13px; color: rgba(255,255,255,0.28); flex-wrap: wrap; gap: 1rem;
-    }
-    footer a { color: rgba(255,255,255,0.38); text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: white; }
-    .footer-links { display: flex; gap: 1.5rem; }
+    /* ── FOOTER ── */
+    footer {
+      background: #091530; padding: 1.75rem 6%;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 13px; color: rgba(255,255,255,0.28); flex-wrap: wrap; gap: 1rem;
+    }
+    footer a { color: rgba(255,255,255,0.38); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: white; }
+    .footer-links { display: flex; gap: 1.5rem; }
 
-    /* ── FADE IN ── */
-    .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    .fade-in.delay-1 { transition-delay: 0.1s; }
-    .fade-in.delay-2 { transition-delay: 0.2s; }
-    .fade-in.delay-3 { transition-delay: 0.3s; }
+    /* ── FADE IN ── */
+    .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in.delay-1 { transition-delay: 0.1s; }
+    .fade-in.delay-2 { transition-delay: 0.2s; }
+    .fade-in.delay-3 { transition-delay: 0.3s; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .news-grid { grid-template-columns: 1fr 1fr; }
-      .news-card.featured { grid-column: span 2; grid-row: auto; }
-      .onas-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .onas-float-stat { bottom: -1rem; right: -0.75rem; }
-      .members-grid { grid-template-columns: repeat(2, 1fr); }
-      .kontakt-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    }
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      section { padding: 60px 5%; }
-      .hero-stats { display: none; }
-      .news-grid { grid-template-columns: 1fr; }
-      .news-card.featured { grid-column: auto; }
-      .vice-row { grid-template-columns: 1fr 1fr; max-width: 100%; }
-      .aktuality-header { flex-direction: column; align-items: flex-start; }
-      .footer-links { display: none; }
-    }
-  </style>
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .news-grid { grid-template-columns: 1fr 1fr; }
+      .news-card.featured { grid-column: span 2; grid-row: auto; }
+      .onas-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .onas-float-stat { bottom: -1rem; right: -0.75rem; }
+      .members-grid { grid-template-columns: repeat(2, 1fr); }
+      .kontakt-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 60px 5%; }
+      .hero-stats { display: none; }
+      .news-grid { grid-template-columns: 1fr; }
+      .news-card.featured { grid-column: auto; }
+      .vice-row { grid-template-columns: 1fr 1fr; max-width: 100%; }
+      .aktuality-header { flex-direction: column; align-items: flex-start; }
+      .footer-links { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav id="navbar">
-  <a href="#home" class="nav-logo">
-    <div class="nav-logo-badge">ŠP</div>
-    Školní Parlament
-  </a>
-  <ul class="nav-links">
-    <li><a href="#home">Domů</a></li>
-    <li><a href="#onas">O nás</a></li>
-    <li><a href="#aktuality">Aktuality</a></li>
-    <li><a href="#clenove">Členové</a></li>
-    <li><a href="#kontakt">Kontakt</a></li>
-  </ul>
-  <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-badge">ŠP</div>
+    Školní Parlament
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Domů</a></li>
+    <li><a href="o-nas.html">O nás</a></li>
+    <li><a href="aktuality.html">Aktuality</a></li>
+    <li><a href="clenove.html">Členové</a></li>
+    <li><a href="kontakt.html">Kontakt</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
-  <button class="mobile-nav-close" onclick="toggleMobileNav()" aria-label="Zavřít">✕</button>
-  <a href="#home" onclick="toggleMobileNav()">Domů</a>
-  <a href="#onas" onclick="toggleMobileNav()">O nás</a>
-  <a href="#aktuality" onclick="toggleMobileNav()">Aktuality</a>
-  <a href="#clenove" onclick="toggleMobileNav()">Členové</a>
-  <a href="#kontakt" onclick="toggleMobileNav()">Kontakt</a>
+  <button class="mobile-nav-close" onclick="toggleMobileNav()" aria-label="Zavřít">✕</button>
+  <a href="index.html" onclick="toggleMobileNav()">Domů</a>
+  <a href="o-nas.html" onclick="toggleMobileNav()">O nás</a>
+  <a href="aktuality.html" onclick="toggleMobileNav()">Aktuality</a>
+  <a href="clenove.html" onclick="toggleMobileNav()">Členové</a>
+  <a href="kontakt.html" onclick="toggleMobileNav()">Kontakt</a>
 </div>
 
-<!-- ══════════════════════════════ HERO ══════════════════════════════ -->
 <section id="home">
-  <div class="hero-bg-glow"></div>
-  <div class="hero-grid-lines"></div>
-  <div class="hero-content">
-    <div class="hero-badge">ZŠ a SŠ Vzorová · Praha</div>
-    <h1 class="hero-title">
-      Váš hlas<br>ve <span class="accent-word">škole.</span>
-    </h1>
-    <p class="hero-subtitle">
-      Školní parlament zastupuje zájmy všech žáků. Jsme tady, abychom naslouchali vašim nápadům, řešili vaše podněty a společně tvořili lepší prostředí pro nás všechny.
-    </p>
-    <div class="hero-cta">
-      <a href="#aktuality" class="btn-primary">Nejnovější aktuality</a>
-      <a href="#onas" class="btn-outline">Zjistit více</a>
-    </div>
-  </div>
-  <div class="hero-stats">
-    <div class="hero-stat">
-      <div class="hero-stat-num">12</div>
-      <div class="hero-stat-label">Členů</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">7</div>
-      <div class="hero-stat-label">Projektů</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">2019</div>
-      <div class="hero-stat-label">Rok vzniku</div>
-    </div>
-  </div>
+  <div class="hero-bg-glow"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-badge">ZŠ Korunovační · Praha</div>
+    <h1 class="hero-title">
+      Váš hlas<br>ve <span class="accent-word">škole.</span>
+    </h1>
+    <p class="hero-subtitle">
+      Školní parlament zastupuje zájmy všech žáků. Jsme tady, abychom naslouchali vašim nápadům, řešili vaše podněty a společně tvořili lepší prostředí pro nás všechny.
+    </p>
+    <div class="hero-cta">
+      <a href="aktuality.html" class="btn-primary">Nejnovější aktuality</a>
+      <a href="o-nas.html" class="btn-outline">Zjistit více</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">12</div>
+      <div class="hero-stat-label">Členů</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">7</div>
+      <div class="hero-stat-label">Projektů</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">2019</div>
+      <div class="hero-stat-label">Rok vzniku</div>
+    </div>
+  </div>
 </section>
 
-<!-- ══════════════════════════════ O NÁS ══════════════════════════════ -->
 <section id="onas">
-  <div class="section-label fade-in">Kdo jsme</div>
-  <div class="onas-grid">
-    <div class="onas-visual fade-in delay-1">
-      <div class="onas-main-card">
-        <p class="onas-quote">„Školní parlament je místem, kde se náš hlas mění v čin. Každý nápad má svou váhu a každý žák má právo být vyslyšen."</p>
-        <div class="onas-quote-source">Kateřina Novotná, předsedkyně parlamentu 2024/25</div>
-      </div>
-      <div class="onas-float-stat">
-        <strong>5+</strong>
-        <span>let aktivní<br>činnosti</span>
-      </div>
-    </div>
-    <div class="onas-text fade-in delay-2">
-      <h2 class="section-title">Co je školní parlament?</h2>
-      <p class="section-desc" style="max-width: 100%; margin-bottom: 0.75rem;">
-        Jsme demokraticky zvolená organizace zastupující žáky naší školy. Fungujeme jako most mezi žáky a vedením — dbáme na to, aby váš hlas byl slyšet.
-      </p>
-      <div class="pillars">
-        <div class="pillar">
-          <div class="pillar-icon">🗣️</div>
-          <div class="pillar-text">
-            <strong>Nasloucháme vám</strong>
-            <span>Sbíráme podněty a nápady od všech žáků školy prostřednictvím schránek i online formulářů.</span>
-          </div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">🤝</div>
-          <div class="pillar-text">
-            <strong>Spolupracujeme s vedením</strong>
-            <span>Pravidelně se setkáváme s ředitelstvím a předkládáme konkrétní návrhy ke schválení.</span>
-          </div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">🎉</div>
-          <div class="pillar-text">
-            <strong>Pořádáme akce</strong>
-            <span>Organizujeme školní projekty, soutěže, kulturní a sportovní akce pro celou školu.</span>
-          </div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">✅</div>
-          <div class="pillar-text">
-            <strong>Řešíme problémy</strong>
-            <span>Aktivně pracujeme na zlepšení prostředí, vybavení i atmosféry ve škole.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="section-label fade-in">Kdo jsme</div>
+  <div class="onas-grid">
+    <div class="onas-visual fade-in delay-1">
+      <div class="onas-main-card">
+        <p class="onas-quote">„Školní parlament je místem, kde se náš hlas mění v čin. Každý nápad má svou váhu a každý žák má právo být vyslyšen."</p>
+        <div class="onas-quote-source">Kateřina Novotná, předsedkyně parlamentu 2024/25</div>
+      </div>
+      <div class="onas-float-stat">
+        <strong>5+</strong>
+        <span>let aktivní<br>činnosti</span>
+      </div>
+    </div>
+    <div class="onas-text fade-in delay-2">
+      <h2 class="section-title">Co je školní parlament?</h2>
+      <p class="section-desc" style="max-width: 100%; margin-bottom: 0.75rem;">
+        Jsme demokraticky zvolená organizace zastupující žáky naší školy. Fungujeme jako most mezi žáky a vedením — dbáme na to, aby váš hlas byl slyšet.
+      </p>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-icon">🗣️</div>
+          <div class="pillar-text">
+            <strong>Nasloucháme vám</strong>
+            <span>Sbíráme podněty a nápady od všech žáků školy prostřednictvím schránek i online formulářů.</span>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🤝</div>
+          <div class="pillar-text">
+            <strong>Spolupracujeme s vedením</strong>
+            <span>Pravidelně se setkáváme s ředitelstvím a předkládáme konkrétní návrhy ke schválení.</span>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🎉</div>
+          <div class="pillar-text">
+            <strong>Pořádáme akce</strong>
+            <span>Organizujeme školní projekty, soutěže, kulturní a sportovní akce pro celou školu.</span>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">✅</div>
+          <div class="pillar-text">
+            <strong>Řešíme problémy</strong>
+            <span>Aktivně pracujeme na zlepšení prostředí, vybavení i atmosféry ve škole.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ══════════════════════════════ AKTUALITY ══════════════════════════════ -->
 <section id="aktuality">
-  <div class="aktuality-header">
-    <div>
-      <div class="section-label fade-in">Novinky</div>
-      <h2 class="section-title fade-in">Aktuality</h2>
-    </div>
-    <a href="#" class="btn-primary fade-in">Všechny články →</a>
-  </div>
-  <div class="news-grid fade-in">
-
-    <!-- featured -->
-    <div class="news-card featured">
-      <div class="news-img ni-blue" style="height:220px;">
-        <div class="ni-overlay"></div>
-        <div class="ni-text">Volby</div>
-      </div>
-      <div class="news-body">
-        <span class="news-tag">Důležité</span>
-        <h3 class="news-title">Výsledky voleb do školního parlamentu pro školní rok 2024/25</h3>
-        <p class="news-excerpt">Proběhly volby nových členů parlamentu. Gratulujeme všem zvoleným zástupcům a děkujeme každému, kdo se zapojil jako kandidát nebo volič. Nový parlament se ujme funkce od 1. října 2024.</p>
-        <div class="news-meta">15. září 2024</div>
-      </div>
-    </div>
-
-    <!-- card 2 -->
-    <div class="news-card">
-      <div class="news-img ni-amber">
-        <div class="ni-overlay"></div>
-        <div class="ni-text">Akce</div>
-      </div>
-      <div class="news-body">
-        <span class="news-tag">Akce</span>
-        <h3 class="news-title">Den otevřených dveří — parlament vítá nové žáky</h3>
-        <div class="news-meta">3. září 2024</div>
-      </div>
-    </div>
-
-    <!-- card 3 -->
-    <div class="news-card">
-      <div class="news-img ni-teal">
-        <div class="ni-overlay"></div>
-        <div class="ni-text">Projekt</div>
-      </div>
-      <div class="news-body">
-        <span class="news-tag">Projekt</span>
-        <h3 class="news-title">Nové lavičky na školním dvoře — náš návrh byl schválen!</h3>
-        <div class="news-meta">20. června 2024</div>
-      </div>
-    </div>
-
-    <!-- card 4 -->
-    <div class="news-card">
-      <div class="news-img ni-plum">
-        <div class="ni-overlay"></div>
-        <div class="ni-text">Soutěž</div>
-      </div>
-      <div class="news-body">
-        <span class="news-tag">Soutěž</span>
-        <h3 class="news-title">Výsledky fotosoutěže „Naše škola objektivem" jsou tu</h3>
-        <div class="news-meta">1. června 2024</div>
-      </div>
-    </div>
-
-  </div>
+  <div class="aktuality-header">
+    <div>
+      <div class="section-label fade-in">Novinky</div>
+      <h2 class="section-title fade-in">Aktuality</h2>
+    </div>
+    <a href="aktuality.html" class="btn-primary fade-in">Všechny články →</a>
+  </div>
+  <div class="news-grid fade-in">
+    <div class="news-card featured">
+      <div class="news-img ni-blue" style="height:220px;">
+        <div class="ni-overlay"></div>
+        <div class="ni-text">Volby</div>
+      </div>
+      <div class="news-body">
+        <span class="news-tag">Důležité</span>
+        <h3 class="news-title">Výsledky voleb do školního parlamentu pro školní rok 2024/25</h3>
+        <p class="news-excerpt">Proběhly volby nových členů parlamentu. Gratulujeme všem zvoleným zástupcům a děkujeme každému, kdo se zapojil jako kandidát nebo volič. Nový parlament se ujme funkce od 1. října 2024.</p>
+        <div class="news-meta">15. září 2024</div>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-img ni-amber">
+        <div class="ni-overlay"></div>
+        <div class="ni-text">Akce</div>
+      </div>
+      <div class="news-body">
+        <span class="news-tag">Akce</span>
+        <h3 class="news-title">Den otevřených dveří — parlament vítá nové žáky</h3>
+        <div class="news-meta">3. září 2024</div>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-img ni-teal">
+        <div class="ni-overlay"></div>
+        <div class="ni-text">Projekt</div>
+      </div>
+      <div class="news-body">
+        <span class="news-tag">Projekt</span>
+        <h3 class="news-title">Nové lavičky na školním dvoře — náš návrh byl schválen!</h3>
+        <div class="news-meta">20. června 2024</div>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-img ni-plum">
+        <div class="ni-overlay"></div>
+        <div class="ni-text">Soutěž</div>
+      </div>
+      <div class="news-body">
+        <span class="news-tag">Soutěž</span>
+        <h3 class="news-title">Výsledky fotosoutěže „Naše škola objektivem" jsou tu</h3>
+        <div class="news-meta">1. června 2024</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ══════════════════════════════ ČLENOVÉ ══════════════════════════════ -->
 <section id="clenove">
-  <div class="clenove-head">
-    <div class="section-label fade-in">Tým</div>
-    <h2 class="section-title fade-in">Členové parlamentu</h2>
-    <p class="section-desc fade-in">Demokraticky zvolení zástupci žáků pro školní rok 2024/2025.</p>
-  </div>
-
-  <!-- Předseda -->
-  <div class="president-row fade-in">
-    <div class="member-card president">
-      <div class="president-badge">Předsedkyně</div>
-      <div class="avatar av1">KN</div>
-      <h3>Kateřina Novotná</h3>
-      <div class="member-role">Předsedkyně parlamentu</div>
-      <div class="member-class">4. A</div>
-    </div>
-  </div>
-
-  <!-- Místopředseda + tajemník -->
-  <div class="vice-row fade-in delay-1">
-    <div class="member-card">
-      <div class="avatar av3">JP</div>
-      <h3>Jakub Procházka</h3>
-      <div class="member-role">Místopředseda</div>
-      <div class="member-class">3. B</div>
-    </div>
-    <div class="member-card">
-      <div class="avatar av4">AS</div>
-      <h3>Anna Šimánková</h3>
-      <div class="member-role">Tajemnice</div>
-      <div class="member-class">4. B</div>
-    </div>
-  </div>
-
-  <!-- Ostatní členové -->
-  <div class="members-grid fade-in delay-2">
-    <div class="member-card">
-      <div class="avatar av2">TK</div>
-      <h3>Tomáš Kovář</h3>
-      <div class="member-role">Člen</div>
-      <div class="member-class">2. A</div>
-    </div>
-    <div class="member-card">
-      <div class="avatar av5">LH</div>
-      <h3>Lucie Horáčková</h3>
-      <div class="member-role">Člen</div>
-      <div class="member-class">3. A</div>
-    </div>
-    <div class="member-card">
-      <div class="avatar av6">MV</div>
-      <h3>Martin Vlček</h3>
-      <div class="member-role">Člen</div>
-      <div class="member-class">1. B</div>
-    </div>
-    <div class="member-card">
-      <div class="avatar av7">PD</div>
-      <h3>Petra Dvořáčková</h3>
-      <div class="member-role">Člen</div>
-      <div class="member-class">2. B</div>
-    </div>
-    <div class="member-card">
-      <div class="avatar av1" style="background:#274980">OK</div>
-      <h3>Ondřej Kratochvíl</h3>
-      <div class="member-role">Člen</div>
-      <div class="member-class">3. C</div>
-    </div>
-    <div class="member-card">
-      <div class="avatar av3" style="background:#1A7A6B">SK</div>
-      <h3>Sara Kučerová</h3>
-      <div class="member-role">Člen</div>
-      <div class="member-class">4. C</div>
-    </div>
-    <div class="member-card">
-      <div class="avatar av8">RN</div>
-      <h3>Radek Nováček</h3>
-      <div class="member-role">Člen</div>
-      <div class="member-class">1. A</div>
-    </div>
-    <div class="member-card">
-      <div class="avatar av6" style="background:#6B1A3A">VM</div>
-      <h3>Veronika Málková</h3>
-      <div class="member-role">Člen</div>
-      <div class="member-class">2. C</div>
-    </div>
-  </div>
+  <div class="clenove-head">
+    <div class="section-label fade-in">Tým</div>
+    <h2 class="section-title fade-in">Členové parlamentu</h2>
+    <p class="section-desc fade-in">Demokraticky zvolení zástupci žáků pro školní rok 2024/2025.</p>
+  </div>
+  <div class="president-row fade-in">
+    <div class="member-card president">
+      <div class="president-badge">Předsedkyně</div>
+      <div class="avatar av1">KN</div>
+      <h3>Kateřina Novotná</h3>
+      <div class="member-role">Předsedkyně parlamentu</div>
+      <div class="member-class">4. A</div>
+    </div>
+  </div>
+  <div class="vice-row fade-in delay-1">
+    <div class="member-card">
+      <div class="avatar av3">JP</div>
+      <h3>Jakub Procházka</h3>
+      <div class="member-role">Místopředseda</div>
+      <div class="member-class">3. B</div>
+    </div>
+    <div class="member-card">
+      <div class="avatar av4">AS</div>
+      <h3>Anna Šimánková</h3>
+      <div class="member-role">Tajemnice</div>
+      <div class="member-class">4. B</div>
+    </div>
+  </div>
+  <div class="members-grid fade-in delay-2">
+    <div class="member-card">
+      <div class="avatar av2">TK</div>
+      <h3>Tomáš Kovář</h3>
+      <div class="member-role">Člen</div>
+      <div class="member-class">2. A</div>
+    </div>
+    <div class="member-card">
+      <div class="avatar av5">LH</div>
+      <h3>Lucie Horáčková</h3>
+      <div class="member-role">Člen</div>
+      <div class="member-class">3. A</div>
+    </div>
+    <div class="member-card">
+      <div class="avatar av6">MV</div>
+      <h3>Martin Vlček</h3>
+      <div class="member-role">Člen</div>
+      <div class="member-class">1. B</div>
+    </div>
+    <div class="member-card">
+      <div class="avatar av7">PD</div>
+      <h3>Petra Dvořáčková</h3>
+      <div class="member-role">Člen</div>
+      <div class="member-class">2. B</div>
+    </div>
+    <div class="member-card">
+      <div class="avatar av1" style="background:#274980">OK</div>
+      <h3>Ondřej Kratochvíl</h3>
+      <div class="member-role">Člen</div>
+      <div class="member-class">3. C</div>
+    </div>
+    <div class="member-card">
+      <div class="avatar av3" style="background:#1A7A6B">SK</div>
+      <h3>Sara Kučerová</h3>
+      <div class="member-role">Člen</div>
+      <div class="member-class">4. C</div>
+    </div>
+    <div class="member-card">
+      <div class="avatar av8">RN</div>
+      <h3>Radek Nováček</h3>
+      <div class="member-role">Člen</div>
+      <div class="member-class">1. A</div>
+    </div>
+    <div class="member-card">
+      <div class="avatar av6" style="background:#6B1A3A">VM</div>
+      <h3>Veronika Málková</h3>
+      <div class="member-role">Člen</div>
+      <div class="member-class">2. C</div>
+    </div>
+  </div>
 </section>
 
-<!-- ══════════════════════════════ KONTAKT ══════════════════════════════ -->
 <section id="kontakt">
-  <div class="section-label">Napište nám</div>
-  <h2 class="section-title">Kontakt</h2>
-  <p class="section-desc">Máte nápad, připomínku nebo podnět? Ozvěte se nám — každý hlas se počítá.</p>
-  <div class="kontakt-grid">
-    <div class="kontakt-info fade-in">
-      <div class="kontakt-item">
-        <div class="kontakt-icon">✉️</div>
-        <div>
-          <div class="kontakt-label">E-mail</div>
-          <div class="kontakt-value">parlament@skola-vzorova.cz</div>
-        </div>
-      </div>
-      <div class="kontakt-item">
-        <div class="kontakt-icon">🏫</div>
-        <div>
-          <div class="kontakt-label">Adresa školy</div>
-          <div class="kontakt-value">ZŠ a SŠ Vzorová<br>Školní náměstí 1, 110 00 Praha 1</div>
-        </div>
-      </div>
-      <div class="kontakt-item">
-        <div class="kontakt-icon">📅</div>
-        <div>
-          <div class="kontakt-label">Schůzky parlamentu</div>
-          <div class="kontakt-value">Každou první středu v měsíci<br>14:00 – 15:00 · místnost 204</div>
-        </div>
-      </div>
-      <div class="kontakt-item">
-        <div class="kontakt-icon">📱</div>
-        <div>
-          <div class="kontakt-label">Instagram</div>
-          <div class="kontakt-value">@parlament.vzorova</div>
-        </div>
-      </div>
-      <div class="kontakt-item">
-        <div class="kontakt-icon">📬</div>
-        <div>
-          <div class="kontakt-label">Schránka návrhů</div>
-          <div class="kontakt-value">Vstup do školy (u vrátnice)<br>nebo online formulář na webu</div>
-        </div>
-      </div>
-    </div>
-    <form class="kontakt-form fade-in delay-1" onsubmit="handleForm(event)">
-      <input type="text" placeholder="Vaše jméno" required>
-      <input type="email" placeholder="Váš e-mail" required>
-      <input type="text" placeholder="Předmět zprávy">
-      <textarea placeholder="Vaše zpráva nebo návrh…"></textarea>
-      <button type="submit" id="sendBtn">Odeslat zprávu →</button>
-    </form>
-  </div>
+  <div class="section-label">Napište nám</div>
+  <h2 class="section-title">Kontakt</h2>
+  <p class="section-desc">Máte nápad, připomínku nebo podnět? Ozvěte se nám — každý hlas se počítá.</p>
+  <div class="kontakt-grid">
+    <div class="kontakt-info fade-in">
+      <div class="kontakt-item">
+        <div class="kontakt-icon">✉️</div>
+        <div>
+          <div class="kontakt-label">E-mail</div>
+          <div class="kontakt-value">parlament@zskorunovacni.cz</div>
+        </div>
+      </div>
+      <div class="kontakt-item">
+        <div class="kontakt-icon">🏫</div>
+        <div>
+          <div class="kontakt-label">Adresa školy</div>
+          <div class="kontakt-value">ZŠ Korunovační<br>Korunovační 8, 170 00 Praha 7</div>
+        </div>
+      </div>
+      <div class="kontakt-item">
+        <div class="kontakt-icon">📅</div>
+        <div>
+          <div class="kontakt-label">Schůzky parlamentu</div>
+          <div class="kontakt-value">Každou první středu v měsíci<br>14:00 – 15:00 · místnost 204</div>
+        </div>
+      </div>
+      <div class="kontakt-item">
+        <div class="kontakt-icon">📱</div>
+        <div>
+          <div class="kontakt-label">Instagram</div>
+          <div class="kontakt-value">@parlament.korunovacni</div>
+        </div>
+      </div>
+      <div class="kontakt-item">
+        <div class="kontakt-icon">📬</div>
+        <div>
+          <div class="kontakt-label">Schránka návrhů</div>
+          <div class="kontakt-value">Vstup do školy (u vrátnice)<br>nebo online formulář na webu</div>
+        </div>
+      </div>
+    </div>
+    <form class="kontakt-form fade-in delay-1" onsubmit="handleForm(event)">
+      <input type="text" placeholder="Vaše jméno" required>
+      <input type="email" placeholder="Váš e-mail" required>
+      <input type="text" placeholder="Předmět zprávy">
+      <textarea placeholder="Vaše zpráva nebo návrh…"></textarea>
+      <button type="submit" id="sendBtn">Odeslat zprávu →</button>
+    </form>
+  </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div>© 2024 Školní Parlament · ZŠ a SŠ Vzorová, Praha</div>
-  <nav class="footer-links">
-    <a href="#home">Domů</a>
-    <a href="#onas">O nás</a>
-    <a href="#aktuality">Aktuality</a>
-    <a href="#clenove">Členové</a>
-    <a href="#kontakt">Kontakt</a>
-  </nav>
+  <div>© 2024 Školní Parlament · ZŠ Korunovační, Praha</div>
+  <nav class="footer-links">
+    <a href="index.html">Domů</a>
+    <a href="o-nas.html">O nás</a>
+    <a href="aktuality.html">Aktuality</a>
+    <a href="clenove.html">Členové</a>
+    <a href="kontakt.html">Kontakt</a>
+  </nav>
 </footer>
 
 <script>
-  function toggleMobileNav() {
-    document.getElementById('mobileNav').classList.toggle('open');
-  }
+  function toggleMobileNav() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
 
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (!target) return;
-      e.preventDefault();
-      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 64, behavior: 'smooth' });
-    });
-  });
+  // Odstraněn kód pro smooth scrollování, jelikož odkazy nyní směřují na nové .html stránky
 
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.style.boxShadow = window.scrollY > 40 ? '0 4px 24px rgba(0,0,0,0.22)' : 'none';
-  }, { passive: true });
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.style.boxShadow = window.scrollY > 40 ? '0 4px 24px rgba(0,0,0,0.22)' : 'none';
+  }, { passive: true });
 
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
 
-  function handleForm(e) {
-    e.preventDefault();
-    const btn = document.getElementById('sendBtn');
-    btn.textContent = 'Zpráva odeslána ✓';
-    btn.style.background = '#1A6B3D';
-    btn.disabled = true;
-    setTimeout(() => { btn.textContent = 'Odeslat zprávu →'; btn.style.background = ''; btn.disabled = false; e.target.reset(); }, 3500);
-  }
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('sendBtn');
+    btn.textContent = 'Zpráva odeslána ✓';
+    btn.style.background = '#1A6B3D';
+    btn.disabled = true;
+    setTimeout(() => { btn.textContent = 'Odeslat zprávu →'; btn.style.background = ''; btn.disabled = false; e.target.reset(); }, 3500);
+  }
 </script>
 </body>
 </html>
